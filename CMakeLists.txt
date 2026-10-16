@@ -26,8 +26,10 @@ add_library(lua_lib OBJECT
 )
 
 add_library(lua STATIC dummy.c)
+target_include_directories(lua PUBLIC lua/src)
 target_link_libraries(lua PUBLIC lua_lib lua_core)
 
 if (${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
-
+  add_executable(test test/test.c)
+  target_link_libraries(test PRIVATE lua)
 endif()
